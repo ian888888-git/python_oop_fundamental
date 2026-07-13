@@ -18,7 +18,7 @@ class TestProduk:
         with pytest.raises(ValueError) as exc_info:
             _ = Produk("Kopi Susu", 15000.0, -5)
         # Memastikan pesan error yang keluar dari class Produk sesuai ekspektasi
-        assert "Jumlah stok tidak boleh negatif!" in str(exc_info.value)
+        assert "Gagal mengubah stok: Jumlah stok tidak boleh minus!" in str(exc_info.value)
     
     def test_failed_direct_access_to_private_property(self):
         """Memastikan proteksi Name Mangling bekerja."""
