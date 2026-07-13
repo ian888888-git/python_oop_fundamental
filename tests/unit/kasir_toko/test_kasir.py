@@ -42,3 +42,39 @@ class TestProduk:
         # SINKRONISASI: Cukup pastikan kata kunci esensial ini ada di dalam pesan error
         assert "has no attribute" in str(exc_info.value)
         assert "__stok" in str(exc_info.value)
+    
+    # -------------------------------------------------------------------------
+    # CHAPTER 3: PENGUJIAN PYTHONIC GETTER & SETTER (@property)
+    # -------------------------------------------------------------------------
+    def test_setter_stok_positif_harus_sukses_mengubah_nilai_di_memori(self):
+        """
+        TEST POSITIF: Memastikan gerbang @stok.setter sukses meloloskan 
+        nilai integer positif yang valid dan memperbarui brankas internal.
+        """
+        # Arrange
+        produk = Produk(nama="Kopi Susu", harga=15000.0, stok=10)
+        # Act: Mengubah nilai menggunakan gaya variabel publik biasa
+        produk.stok = 28 
+        # Assert: Memverifikasi lewat getter apakah nilainya berubah menjadi 28
+        assert produk.stok == 28
+
+    def test_setter_stok_negatif_angka_minus_harus_melempar_value_error(self):
+        """
+        TEST NEGATIF (ATURAN BISNIS): Memastikan gerbang @stok.setter menolak
+        angka minus dan melemparkan ValueError dengan pesan literal yang tepat.
+        """
+        produk = Produk(nama="Kopi Susu", harga=15000.0, stok=10)
+        with pytest.raises(ValueError) as exc_info:
+            produk.stok = -5
+        assert "Jumlah stok tidak boleh negatif!" in str(exc_info.value)
+    
+    def test_setter_stok_tipe_data_string_salah_harus_melempar_type_error(self):
+        """
+        TEST NEGATIF (TYPE ASSURANCE): Memastikan gerbang @stok.setter menolak
+        jika diberi tipe data teks (string) dan melemparkan TypeError.
+        """
+        produk = Produk(nama="Kopi Susu", harga=15000.0, stok=10)
+        with pytest.raises(TypeError) as exc_info:
+            produk.stok = "10"
+        assert "stok must be an integer" in str(exc_info.value)
+

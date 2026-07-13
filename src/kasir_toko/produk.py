@@ -1,17 +1,12 @@
 class Produk:
     """
-    SUBSTANSI: Anatomi kelas paling dasar untuk memetakan data Produk Fisik.
+    SUBSTANSI: Implementasi Getter & Setter menggunakan gaya Pythonic (@property).
     KACAMATA PHP NATIVE:
     --------------------
     class Produk {
-        public $nama;
-        public $harga;
-        public $stok;
-        
-        public function __construct($nama, $harga, $stok) {
-            $this->nama = $nama;
-            ...
-        }
+        private $stok;
+        public function getStok() { return $this->stok; }
+        public function setStok($jumlah) { ... }
     }
     """
     def __init__(self, nama: str, harga:float, stok:int):
@@ -22,8 +17,34 @@ class Produk:
         # Mendaftarkan properti secara langsung ke dalam memori objek
         self.nama = nama 
         self.harga = harga 
-        if stok < 0:
-            # Menggantikan die() atau trigger_error() di PHP dengan Exception resmi
-            raise ValueError("Gagal membuat class produk: Jumlah stok tidak boleh negatif!")
-        # Jika lolos validasi, baru data disimpan ke brankas privat
-        self.__stok: int = stok
+
+        # REVISI KETERANGAN:
+        # Melempar stok ke gerbang @setter di bawah untuk divalidasi dulu.
+        # Jika lolos validasi angka minus/teks, baru aman disimpan ke memori.
+        self.stok: int = stok
+    
+    @property 
+    def stok(self) -> int:
+        """
+        GERBANG GETTER (BACA DATA)
+        Mengizinkan pihak luar membaca variabel privat __stok tanpa kurung ().
+        Sintaksis penggunaan: produk.stok
+        """
+        return self.__stock
+    
+    @stok.setter
+    def stok(self, jumlah:int) -> None:
+        """
+        GERBANG SETTER (TULIS DATA)
+        Memvalidasi setiap upaya pengisian nilai ke 'produk.stok = jumlah'.
+        """
+        # 1. Type Guard: Memastikan input bukan string atau tipe data ilegal lainnya
+        if not isinstance(jumlah, int):
+            raise TypeError("Gagal mengubah stok: Tipe data stok harus berupa angka bulat (Integer)!")
+        
+        # 2. Business Rule Guard: Memastikan stok tidak minus
+        if jumlah < 0:
+            raise ValueError("Gagal mengubah stok: Jumlah stok tidak boleh minus!")
+        
+        # Jika lolos semua barikade, simpan ke brankas privat
+        self.__stok = jumlah
