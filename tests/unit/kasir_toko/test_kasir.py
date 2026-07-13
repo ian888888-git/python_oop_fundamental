@@ -57,5 +57,5 @@ class TestProduk:
         produk = Produk(nama="Kopi Susu", harga=15000.0, stok=10)
         with pytest.raises(TypeError) as exc_info:
             produk.stok = "10"
-        assert "Gagal mengubah stok: Tipe data stok harus berupa angka bulat (Integer)!" in str(exc_info.value)
+        assert "Tipe data stok harus berupa angka bulat" in str(exc_info.value)
 

@@ -30,7 +30,7 @@ class Produk:
         Mengizinkan pihak luar membaca variabel privat __stok tanpa kurung ().
         Sintaksis penggunaan: produk.stok
         """
-        return self.__stock
+        return self.__stok
     
     @stok.setter
     def stok(self, jumlah:int) -> None:
