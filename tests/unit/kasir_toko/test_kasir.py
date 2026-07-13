@@ -1,5 +1,5 @@
 import pytest 
-from src.kasir_toko.kasir import Produk
+from src.kasir_toko.produk import Produk
 
 class TestProduk:
     def test_konstruktor(self):
