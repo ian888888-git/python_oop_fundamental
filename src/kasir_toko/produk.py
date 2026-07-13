@@ -22,4 +22,8 @@ class Produk:
         # Mendaftarkan properti secara langsung ke dalam memori objek
         self.nama = nama 
         self.harga = harga 
-        self.stok = stok
+        if stok < 0:
+            # Menggantikan die() atau trigger_error() di PHP dengan Exception resmi
+            raise ValueError("Gagal membuat class produk: Jumlah stok tidak boleh negatif!")
+        # Jika lolos validasi, baru data disimpan ke brankas privat
+        self.__stok: int = stok
