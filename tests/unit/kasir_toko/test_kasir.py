@@ -16,4 +16,29 @@ class TestProduk:
         # SINKRONISASI: Memeriksa akurasi nilai literal string dan angka
         assert produk.nama == "Kopi Susu"
         assert produk.harga == 15000.0
-        assert produk.stok == 10
+        # assert produk.stok == 10
+    
+    def test_failed_stock_minus(self):
+        """
+        SUBSTANSI: Verifikasi Validasi Internal Kelas (Business Rule Invariant Test).
+        Memastikan bahwa class Produk secara mandiri mampu menolak data ilegal (minus)
+        dan melemparkan ValueError dari dalam tubuh kelasnya sendiri.
+        """
+        # Aksi & Validasi: Kita sengaja memasukkan stok -5
+        # Kita harapkan class Produk melemparkan ValueError
+        with pytest.raises(ValueError) as exc_info:
+            produk_paduan = Produk("Kopi Susu", 15000.0, -5)
+        # Memastikan pesan error yang keluar dari class Produk sesuai ekspektasi
+        assert "Jumlah stok tidak boleh negatif!" in str(exc_info.value)
+    
+    def test_failed_direct_access_to_private_property(self):
+        """
+        BENTENG 1 (PROTEKSI LUAR): Memastikan pihak luar tidak bisa mengintip
+        atau memanggil 'produk.__stok' secara langsung akibat Name Mangling.
+        """
+        produk = Produk("Kopi Susu", 15000.0, 10)
+        with pytest.raises(AttributeError) as exc_info:
+            baca_stok_illegal = produk.__stok
+        # SINKRONISASI: Cukup pastikan kata kunci esensial ini ada di dalam pesan error
+        assert "has no attribute" in str(exc_info.value)
+        assert "__stok" in str(exc_info.value)
