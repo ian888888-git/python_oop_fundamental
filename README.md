@@ -6,7 +6,12 @@ Seluruh kode dalam proyek ini telah terintegrasi dengan pipeline **CI/CD (GitHub
 Sistem ini menerapkan prinsip *Separation of Concerns* (SoC) dan *Domain-Driven Design* (DDD) modular. Aliran eksekusi data pada mode produksi (*Production Run*) berjalan secara linear sebagai berikut:
 main.py (Docker Entry) ──> pipeline.py (Master Orchestrator) ──> src/kasir_toko/pipeline_kasir.py ──> Objek Bisnis (Produk/Keranjang)
 
+-------
+
 ## Arsitektur Folder Kerja
+
+```text
+.
 oop_python_fundamental/
 │
 ├── src/                               # 📁 KODE AKTIF (Versi Terkini & Siap Produksi)
