@@ -16,7 +16,7 @@ class TestProduk:
         # SINKRONISASI: Memeriksa akurasi nilai literal string dan angka
         assert produk.nama == "Kopi Susu"
         assert produk.harga == 15000.0
-        # assert produk.stok == 10
+        assert produk.stok == 10
     
     def test_failed_stock_minus(self):
         """
@@ -66,7 +66,7 @@ class TestProduk:
         produk = Produk(nama="Kopi Susu", harga=15000.0, stok=10)
         with pytest.raises(ValueError) as exc_info:
             produk.stok = -5
-        assert "Jumlah stok tidak boleh negatif!" in str(exc_info.value)
+        assert "Jumlah stok tidak boleh minus!" in str(exc_info.value)
     
     def test_setter_stok_tipe_data_string_salah_harus_melempar_type_error(self):
         """
@@ -76,5 +76,5 @@ class TestProduk:
         produk = Produk(nama="Kopi Susu", harga=15000.0, stok=10)
         with pytest.raises(TypeError) as exc_info:
             produk.stok = "10"
-        assert "stok must be an integer" in str(exc_info.value)
+        assert "Gagal mengubah stok: Tipe data stok harus berupa angka bulat (Integer)!" in str(exc_info.value)
 
