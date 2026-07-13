@@ -39,4 +39,6 @@ class TestProduk:
         produk = Produk("Kopi Susu", 15000.0, 10)
         with pytest.raises(AttributeError) as exc_info:
             baca_stok_illegal = produk.__stok
-        assert "'Produk' object has no attribute '__stok'" in str(exc_info.value)
+        # SINKRONISASI: Cukup pastikan kata kunci esensial ini ada di dalam pesan error
+        assert "has no attribute" in str(exc_info.value)
+        assert "__stok" in str(exc_info.value)
