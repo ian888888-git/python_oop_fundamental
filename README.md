@@ -1,13 +1,11 @@
 # OOP Pyhton Fundamental: From PHP Native to Modern Python OOP Transition Guide
 Repositori ini dirancang sebagai panduan praktis dan dokumentasi arsitektur untuk memahami konsep **Object-Oriented Programming (OOP) Modern di Python** dengan menggunakan pendekatan serta komparasi langsung dari perspektif **PHP Native (Old-School)**. 
-
 Seluruh kode dalam proyek ini telah terintegrasi dengan pipeline **CI/CD (GitHub Actions)** untuk memastikan kepatuhan tipe data (*Type Assurance*) dan keberhasilan pengujian otomatis sebelum masuk ke lingkungan produksi.
----
+
 ## 🏛️ Arsitektur & Aliran Orkestrasi Data
 Sistem ini menerapkan prinsip *Separation of Concerns* (SoC) dan *Domain-Driven Design* (DDD) modular. Aliran eksekusi data pada mode produksi (*Production Run*) berjalan secara linear sebagai berikut:
-```text
 main.py (Docker Entry) ──> pipeline.py (Master Orchestrator) ──> src/kasir_toko/pipeline_kasir.py ──> Objek Bisnis (Produk/Keranjang)
----
+
 ## Arsitektur Folder Kerja
 oop_python_fundamental/
 │
