@@ -48,3 +48,24 @@ class Produk:
         
         # Jika lolos semua barikade, simpan ke brankas privat
         self.__stok = jumlah
+    
+    # -------------------------------------------------------------------------
+    # TAMBAHAN TERBARU UNTUK CHAPTER 6: INTEGRASI PEWARISAN & OVERRIDING
+    # -------------------------------------------------------------------------
+    def kurangi_stok(self, jumlah: int) -> None:
+        """
+        SUBSTANSI: Metode dasar untuk memproses pengurangan stok produk fisik.
+        Fungsi ini nantinya akan 'ditimpa' (overridden) oleh kelas anak ProdukDigital.
+        KACAMATA PHP NATIVE:
+        --------------------
+        public function kurangiStok($jumlah) {
+            if ($jumlah > $this->stok) { throw new Exception(...); }
+            $this->setStok($this->stok - $jumlah);
+        }
+        """
+        # 1. Pos Jaga Transaksi: Memastikan jumlah yang dibeli tidak melebihi stok gudang
+        if jumlah > self.stok:
+            raise ValueError("Gagal mengurangi stok: Stok tidak mencukupi!")
+        
+        # 2. Proses Pengurangan Stok
+        self.stok -= jumlah
